@@ -1,0 +1,21 @@
+creationTimestamp: '2019-03-23T15:51:03.855-07:00'
+defaultService: https://www.googleapis.com/compute/alpha/projects/copenhagen-233121/global/backendServices/payments-service
+hostRules:
+- hosts:
+  - '*'
+  pathMatcher: ok
+kind: compute#urlMap
+name: payments-url-map
+pathMatchers:
+- defaultService: https://www.googleapis.com/compute/alpha/projects/copenhagen-233121/global/backendServices/shopping-cart-service
+  name: ok
+  routeRules:
+  - matchRules:
+    - prefixMatch: ''
+    routeAction:
+      weightedBackendServices:
+        - backendService: https://www.googleapis.com/compute/alpha/projects/copenhagen-233121/global/backendServices/shopping-cart-service
+          weight: 95
+        - backendService: https://www.googleapis.com/compute/alpha/projects/copenhagen-233121/global/backendServices/shopping-cart-service
+          weight: 5
+selfLink: https://www.googleapis.com/compute/alpha/projects/copenhagen-233121/global/urlMaps/payments-url-map
