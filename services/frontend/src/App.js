@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import './App.css';
-import Container from './Container';
+import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <br />
-        <Container />
-      </div>
-    );
-  }
+import Main from './Main';
+import MembersContextProvider from './contexts/MembersProvider';
+
+function App() {
+  return (
+    <MembersContextProvider>
+      <Router>
+        <Route path="/" component={Main} />
+      </Router>
+    </MembersContextProvider>
+  );
 }
 
 export default App;

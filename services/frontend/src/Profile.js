@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+import { Link } from 'react-router-dom';
+
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -27,21 +29,15 @@ const styles = theme => ({
     display: 'flex',
     minHeight: 64
   },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest
-    })
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)'
-  },
   avatar: {
     backgroundColor: red[500]
   },
   header: {
     textAlign: 'left'
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'blue'
   },
   // Button animation.
   button: {
@@ -74,7 +70,7 @@ const styles = theme => ({
   }
 });
 
-function RecipeReviewCard({ classes, member }) {
+function RecipeReviewCard({ classes, member, index }) {
   const [animate, setAnimate] = useState(0);
   const prevValue = usePrevious(member);
 
@@ -102,7 +98,15 @@ function RecipeReviewCard({ classes, member }) {
           title: classes.header,
           subheader: classes.header
         }}
-        title={member.name}
+        title={
+          index !== undefined ? (
+            <Link className={classes.link} to={`/${index}`}>
+              {member.name}
+            </Link>
+          ) : (
+            member.name
+          )
+        }
         subheader={member.title}
       />
       <CardMedia
