@@ -22,12 +22,11 @@ function Main({ classes }) {
   useEffect(() => {
     if (interval === undefined) {
       interval = setInterval(async () => {
-        setError(undefined);
-
         try {
           const response = await fetch('/v1/users');
 
           setMembers(await response.json());
+          setError(undefined);
         } catch (err) {
           setError(err.message);
         }
